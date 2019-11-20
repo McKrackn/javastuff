@@ -58,4 +58,12 @@ public class CustomStack <E>
          }
          return sb.toString();
     }
+    
+    public int top()
+    {
+        if (size==0) {
+       	 return 0;
+        }
+        return elements[size];
+   }
 }
