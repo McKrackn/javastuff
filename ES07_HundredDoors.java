@@ -16,9 +16,9 @@ public class Main {
 	        }
 	 
 	        for (int i = 0; i < doors.length; i++) {
-	            //if (doors[i]) {
+	            if (doors[i]) {
 	                System.out.printf("\n%d "+doors[i], i);
-	            //}
+	            }
 	        }
 			sc.close();
 
