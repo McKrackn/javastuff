@@ -10,9 +10,9 @@ public class Main {
 		boolean grid[][]=new boolean[M][N];
 
 		
-		for (int i = 0; i < grid.length; i++) 
+		for (int i = 0; i < M; i++) 
 		{ 
-			for (int j = 0; j < grid[0].length; j++) 
+			for (int j = 0; j < N; j++) 
 			{ 
 				grid[i][j] = false; 
 			}  
@@ -23,18 +23,18 @@ public class Main {
 		int y=sc.nextInt();
 				
 		while (x>=0 && y>=0) {
-			grid[x][y]=true;
+			grid[x+1][y+1]=true;
 			x=sc.nextInt();
 			if (x>=0) {
 				y=sc.nextInt();
 			}
 		}
 
-		for (int i = 1; i < grid.length-1; i++) 
+		for (int i = 1; i < M-1; i++) 
 		{ 
-			for (int j = 1; j < grid[0].length-1; j++) 
+			for (int j = 1; j < N-1; j++) 
 			{ 
-				if (grid[i-1][j-1] == false) 
+				if (grid[i][j] == false) 
 					System.out.printf("."); 
 				else
 					System.out.printf("X"); 
@@ -48,7 +48,6 @@ public class Main {
 		}
  
 
-	// Function to print next generation 
 	static void nextGeneration(boolean grid[][], int M, int N, Scanner sc) 
 	{ 
 		boolean[][] future = new boolean[M][N]; 
@@ -63,10 +62,9 @@ public class Main {
 			turns++;
 
 
-		// Loop through every cell 
-		for (int l = 0; l < M ; l++) 
+		for (int l = 1; l < M-1 ; l++) 
 		{ 
-			for (int m = 0; m < N ; m++) 
+			for (int m = 1; m < N-1 ; m++) 
 			{ 
 				int aliveNeighbours = 0; 
 				for (int i = -1; i <= 1; i++) {
@@ -85,21 +83,19 @@ public class Main {
 					aliveNeighbours--; 
 				}
 
-				// Implementing the Rules of Life 
-
-				// Cell is lonely and dies 
+				// Mr. Lonely 
 				if ((grid[l][m] == true) && (aliveNeighbours < 2)) 
 					future[l][m] = false; 
 
-				// Cell dies due to over population 
+				// SCS Samstag morgen 
 				else if ((grid[l][m] == true) && (aliveNeighbours > 3)) 
 					future[l][m] = false; 
 
-				// A new cell is born 
+				// A new star is born 
 				else if ((grid[l][m] == false) && (aliveNeighbours == 3)) 
 					future[l][m] = true; 
 
-				// Remains the same 
+				// unchanged 
 				else
 					future[l][m] = grid[l][m]; 
 			} 
@@ -120,7 +116,7 @@ public class Main {
 		{ 
 			for (int j = 1; j < N-1; j++) 
 			{ 
-				if (future[i-1][j-1] == true) 
+				if (future[i][j] == true) 
 					System.out.print("X"); 
 				else
 					System.out.print("."); 
