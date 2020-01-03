@@ -1,0 +1,17 @@
+package ShortestPath;
+
+
+import java.util.Scanner;
+
+public class Main { 
+	static final double oo = Double.POSITIVE_INFINITY;
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		
+	    System.out.println("try it. then let's talk about it."); 
+
+		}
+		}
+		
