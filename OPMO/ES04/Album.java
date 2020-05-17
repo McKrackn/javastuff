@@ -7,7 +7,7 @@ public class Album extends Release {
 		Track track;
 		
 		TrackListItem(Track t){
-			track=new Track(t);
+			track=t;
 		}
 	}
 
@@ -39,61 +39,28 @@ public class Album extends Release {
 		cur.next=newTrackList;
 		return true;		
 	}
-	
-	//Code von Shagha:
+
 	public Track removeTrack(int n) {
-		if (trackListHead == null)
-			return null;
-
-		int cnt = 0;
-		Track tmp = new Track();
-		TrackListItem lastTrack = trackListHead;
-		for (TrackListItem t = trackListHead; t != null; t = t.next) {
-			if (n == cnt) {
-				tmp = t.track;
-				if (trackListHead == t) {
-					trackListHead = t.next;
-					t.next = null;
-					return tmp;
-				}
-				lastTrack.next = t.next;
-				return tmp;
+		if (trackListHead==null) return null;
+		if (n==0) {
+			TrackListItem tmp=trackListHead.next;
+			TrackListItem old=trackListHead;
+			trackListHead.next=null;
+			trackListHead=tmp;
+			return old.track;
+		} else {
+		
+		for (TrackListItem cur=trackListHead;cur!=null;cur=cur.next) {
+			n--;
+			if (n==0) {
+				Track toRet=cur.next.track;
+				cur.next=cur.next.next;
+				return toRet;
 			}
-			lastTrack = t;
-			cnt++;
 		}
-
+		}
 		return null;
 	}
-	
-//	originalcode:	
-//	public Track removeTrack(int n) {
-//		
-//		
-//		
-//		if (trackListHead==null) return null;
-//		if (n==0) {
-//			TrackListItem tmp=trackListHead.next;
-//			TrackListItem old=trackListHead;
-//			trackListHead.next=null;
-//			trackListHead=tmp;
-//
-////			trackListHead=trackListHead.next;
-////			old.next=null;
-//			return old.track;
-//		} else {
-//		
-//		for (TrackListItem cur=trackListHead;cur!=null;cur=cur.next) {
-//			n--;
-//			if (n==0) {
-//				Track toRet=cur.next.track;
-//				cur.next=cur.next.next;
-//				return toRet;
-//			}
-//		}
-//		}
-//		return null;
-//	}
 	
 	public int nrTracks() {
 		int cnt=0;
@@ -127,14 +94,11 @@ public class Album extends Release {
 	@Override
 	public String toString() {
 		String albumTracks="";
-		
 		for (TrackListItem cur = trackListHead; cur != null; cur = cur.next) {
-
-			albumTracks=albumTracks+"["+cur.track.getTitle()+"]["+cur.track.getTitle()+"]\n";
+			albumTracks=albumTracks+"["+cur.track.getTitle()+"]";
 		}
-		
 		return super.toString() +"\n["
 				+ albumTracks
-				+ "] "+nrTracks();
+				+ "]";
 	}
 }
